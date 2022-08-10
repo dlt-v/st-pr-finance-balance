@@ -1,0 +1,9 @@
+{% if entries %}
+    <ul>
+    {% for entry in entries %}
+        <li><a href="{% url 'savings:detail' entry.id%}">{{ entry.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No entries exist.</p>
+{% endif %}
