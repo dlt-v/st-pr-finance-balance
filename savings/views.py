@@ -28,10 +28,19 @@ def index(request):
             'leftover': leftover_sum
         }
         context_entries.append(new_context_entry)
-
+    dataset = []
+    for i in range(12):
+        val_by_month = Entry.objects.filter(created_at__month=i + 1).filter(owner=request.user).aggregate(Sum('value'))[
+            'value__sum']
+        if val_by_month is None:
+            dataset.append(0)
+            continue
+        dataset.append(val_by_month)
+    print(dataset)
     context = {
         'entries': context_entries,
         'value_sum': value_sum,
+        'dataset': dataset
     }
     return render(request, 'savings/index.html', context)
 
