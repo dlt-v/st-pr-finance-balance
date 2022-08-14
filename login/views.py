@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth import authenticate, login as log_user
+from django.contrib.auth import authenticate, login as log_user, logout as logout_user
 from django.contrib.auth.models import User
 
 
@@ -10,7 +10,7 @@ def login(request):
         user = authenticate(request, username=user_mail, password=user_password)
         if user is not None:
             log_user(request, user)
-            return render(request, 'savings/index.html')
+            return redirect('savings:index')
 
     return render(request, 'login/login.html')
 
@@ -27,3 +27,9 @@ def register(request):
             return redirect('login:login')
 
     return render(request, 'login/register.html')
+
+
+def logout(request):
+    logout_user(request)
+    return redirect('login:login')
+
