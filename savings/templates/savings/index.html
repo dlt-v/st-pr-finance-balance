@@ -17,19 +17,20 @@
         <div class="main--container">
             <div class="balance">
                 <h1>Current balance</h1>
-                <h2>14 200 PLN</h2>
+                <h2>{{ value_sum }} PLN</h2>
                 <div class="balance--form balance--entry">
                     <form action="" method="post">
+                        {% csrf_token %}
                         <div class="entry--left two-rows">
                             <input
                                 type="text"
-                                name=""
+                                name="title"
                                 id=""
                                 placeholder="Title"
                             />
                             <input
                                 type="number"
-                                name=""
+                                name="value"
                                 id=""
                                 placeholder="Value"
                             />
@@ -40,102 +41,21 @@
                     </form>
                 </div>
                 <div class="balance--container">
-                    <div class="balance--entry">
-                        <div class="entry--left">
-                            <p class="description">Gift from dad</p>
-                            <p class="before">14 000 PLN</p>
-                            <p class="value value__green">+ 200 PLN</p>
-                            <p class="date">20.07.2022</p>
+                    {% for entry in entries %}
+                        <div class="balance--entry">
+                            <div class="entry--left">
+                                <p class="description">{{ entry.title }}</p>
+                                <p class="before">14 000 PLN</p>
+                                <p class="value value__green">{{ entry.value }}</p>
+                                <p class="date">{{ entry.created_at|date:"d.m.Y" }}</p>
+                            </div>
+                            <div class="entry--right two-rows">
+                                <button class="blue">Edit</button>
+                                <button class="red">Delete</button>
+                            </div>
                         </div>
-                        <div class="entry--right two-rows">
-                            <button class="blue">Edit</button>
-                            <button class="red">Delete</button>
-                        </div>
-                    </div>
-                    <div class="balance--entry">
-                        <div class="entry--left">
-                            <p class="description">Gift from dad</p>
-                            <p class="before">14 000 PLN</p>
-                            <p class="value value__green">+ 200 PLN</p>
-                            <p class="date">20.07.2022</p>
-                        </div>
-                        <div class="entry--right two-rows">
-                            <button class="blue">Edit</button>
-                            <button class="red">Delete</button>
-                        </div>
-                    </div>
-                    <div class="balance--entry">
-                        <div class="entry--left">
-                            <p class="description">Gift from dad</p>
-                            <p class="before">14 000 PLN</p>
-                            <p class="value value__green">+ 200 PLN</p>
-                            <p class="date">20.07.2022</p>
-                        </div>
-                        <div class="entry--right two-rows">
-                            <button class="blue">Edit</button>
-                            <button class="red">Delete</button>
-                        </div>
-                    </div>
-                    <div class="balance--entry">
-                        <div class="entry--left">
-                            <p class="description">Gift from dad</p>
-                            <p class="before">14 000 PLN</p>
-                            <p class="value value__green">+ 200 PLN</p>
-                            <p class="date">20.07.2022</p>
-                        </div>
-                        <div class="entry--right two-rows">
-                            <button class="blue">Edit</button>
-                            <button class="red">Delete</button>
-                        </div>
-                    </div>
-                    <div class="balance--entry">
-                        <div class="entry--left">
-                            <p class="description">Gift from dad</p>
-                            <p class="before">14 000 PLN</p>
-                            <p class="value value__green">+ 200 PLN</p>
-                            <p class="date">20.07.2022</p>
-                        </div>
-                        <div class="entry--right two-rows">
-                            <button class="blue">Edit</button>
-                            <button class="red">Delete</button>
-                        </div>
-                    </div>
-                    <div class="balance--entry">
-                        <div class="entry--left">
-                            <p class="description">Gift from dad</p>
-                            <p class="before">14 000 PLN</p>
-                            <p class="value value__green">+ 200 PLN</p>
-                            <p class="date">20.07.2022</p>
-                        </div>
-                        <div class="entry--right two-rows">
-                            <button class="blue">Edit</button>
-                            <button class="red">Delete</button>
-                        </div>
-                    </div>
-                    <div class="balance--entry">
-                        <div class="entry--left">
-                            <p class="description">Gift from dad</p>
-                            <p class="before">14 000 PLN</p>
-                            <p class="value value__green">+ 200 PLN</p>
-                            <p class="date">20.07.2022</p>
-                        </div>
-                        <div class="entry--right two-rows">
-                            <button class="blue">Edit</button>
-                            <button class="red">Delete</button>
-                        </div>
-                    </div>
-                    <div class="balance--entry">
-                        <div class="entry--left">
-                            <p class="description">Gift from dad</p>
-                            <p class="before">14 000 PLN</p>
-                            <p class="value value__green">+ 200 PLN</p>
-                            <p class="date">20.07.2022</p>
-                        </div>
-                        <div class="entry--right two-rows">
-                            <button class="blue">Edit</button>
-                            <button class="red">Delete</button>
-                        </div>
-                    </div>
+
+                    {% endfor %}
                 </div>
             </div>
             <div class="graph">
