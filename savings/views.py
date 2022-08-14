@@ -5,10 +5,10 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 
 
-@login_required(redirect_field_name='')
+# @login_required(redirect_field_name='')
 def index(request):
-    # if not request.user.is_authenticated:
-    #     return redirect('login:login')
+    if not request.user.is_authenticated:
+        return redirect('login:login')
     if request.method == 'POST':
         title = request.POST['title']
         value = request.POST['value']
