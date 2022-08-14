@@ -12,11 +12,12 @@
         <div class="container register">
             <h1>Create an account</h1>
             <form action="" method="post">
-                <input type="email" name="reg-email" id="" placeholder="Email" />
-                <input type="password" name="reg-passwd" id="" placeholder="Password" />
+                {% csrf_token %}
+                <input type="email" name="reg_email" id="" placeholder="Email" />
+                <input type="password" name="reg_passwd" id="" placeholder="Password" />
                 <input
                     type="password"
-                    name="reg-passwd2"
+                    name="reg_passwd2"
                     id=""
                     placeholder="Repeat password"
                 />

@@ -1,9 +1,29 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import authenticate, login as log_user
+from django.contrib.auth.models import User
 
 
 def login(request):
+    if request.method == 'POST':
+        user_mail = request.POST['email']
+        user_password = request.POST['password']
+        user = authenticate(request, username=user_mail, password=user_password)
+        if user is not None:
+            log_user(request, user)
+            return render(request, 'savings/index.html')
+
     return render(request, 'login/login.html')
 
 
 def register(request):
+    if request.method == 'POST':
+        user_mail = request.POST['reg_email']
+        user_password = request.POST['reg_passwd']
+        user_password2 = request.POST['reg_passwd2']
+        if user_password == user_password2 and not User.objects.filter(email=user_mail).exists():
+            new_user = User.objects.create_user(user_mail, user_mail, user_password)
+            new_user.save()
+            print(new_user)
+            return render(request, 'login/login.html')
+
     return render(request, 'login/register.html')
