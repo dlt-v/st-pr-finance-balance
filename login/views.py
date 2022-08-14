@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login as log_user
 from django.contrib.auth.models import User
 
@@ -24,6 +24,6 @@ def register(request):
             new_user = User.objects.create_user(user_mail, user_mail, user_password)
             new_user.save()
             print(new_user)
-            return render(request, 'login/login.html')
+            return redirect('login:login')
 
     return render(request, 'login/register.html')
