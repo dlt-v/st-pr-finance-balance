@@ -45,8 +45,12 @@
                         <div class="balance--entry">
                             <div class="entry--left">
                                 <p class="description">{{ entry.title }}</p>
-                                <p class="before">14 000 PLN</p>
-                                <p class="value value__green">{{ entry.value }}</p>
+                                <p class="before">{{ entry.leftover }} PLN</p>
+                                {% if entry.value > 0 %}
+                                    <p class="value value__green">+{{ entry.value }} PLN</p>
+                                {% else %}
+                                    <p class="value value__red">{{ entry.value }} PLN</p>
+                                {% endif %}
                                 <p class="date">{{ entry.created_at|date:"d.m.Y" }}</p>
                             </div>
                             <div class="entry--right two-rows">
