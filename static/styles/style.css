@@ -96,9 +96,9 @@ html {
 }
 
 .graph {
-    width: 100%;
+    width: calc(100% - 1000px);
     min-width: 700px;
-    max-width: calc(100vw - 1000px);
+    max-width: 1500px;
     height: auto;
     background-color: rgba(44, 136, 156, 0.275);
     border-radius: 15px;
@@ -106,6 +106,8 @@ html {
     margin: 20vh 0 0 60px;
     padding: 30px 40px 20px 40px;
     position: relative;
+    max-height: 950px;
+
 }
 
 canvas {
@@ -120,6 +122,7 @@ canvas {
     backdrop-filter: blur(8px);
     margin: 20vh 0 0 10vw;
     padding: 30px 40px 20px 40px;
+    max-height: 950px;
 }
 
 .balance h1 {

@@ -66,13 +66,13 @@
     </div>
 </div>
 <script defer>
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June'];
+    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     const data = {
         labels: labels,
         datasets: [
             {
-                label: 'My First dataset',
+                label: 'Balance',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: [0, 10, 5, 2, 20, 30, 45],
@@ -94,13 +94,19 @@
                     ticks: {
                         // Include a dollar sign in the ticks
                         callback: function (value, index, ticks) {
-                            return '$' + value;
+                            return value + " PLN";
                         },
 
                         color: 'white',
                     },
                     color: 'white',
                 },
+                x: {
+                    ticks: {
+                        color: 'white',
+                    }
+
+                }
             },
         },
     };
