@@ -20,7 +20,6 @@ def index(request):
     leftover_sum: int = value_sum
     context_entries = []
     for entry in entries:
-        print(entry.value)
         leftover_sum -= entry.value
         new_context_entry = {
             'title': entry.title,

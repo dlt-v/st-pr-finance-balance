@@ -1,70 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Balance</title>
-        <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
-        <script
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Balance</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}"/>
+    <script
             src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
-            defer
-        ></script>
-        <script src="{% static 'scripts/main.js' %}" defer></script>
-    </head>
-    <body>
-        <div class="main--container">
-            <div class="balance">
-                <h1>Current balance</h1>
-                <h2>{{ value_sum }} PLN</h2>
-                <div class="balance--form balance--entry">
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <div class="entry--left two-rows">
-                            <input
-                                type="text"
-                                name="title"
-                                id=""
-                                placeholder="Title"
-                            />
-                            <input
-                                type="number"
-                                name="value"
-                                id=""
-                                placeholder="Value"
-                            />
-                        </div>
-                        <div class="entry--right two-rows">
-                            <input type="submit" value="Add" class="button" />
-                        </div>
-                    </form>
-                </div>
-                <div class="balance--container">
-                    {% for entry in entries %}
-                        <div class="balance--entry">
-                            <div class="entry--left">
-                                <p class="description">{{ entry.title }}</p>
-                                <p class="before">{{ entry.leftover }} PLN</p>
-                                {% if entry.value > 0 %}
-                                    <p class="value value__green">+{{ entry.value }} PLN</p>
-                                {% else %}
-                                    <p class="value value__red">{{ entry.value }} PLN</p>
-                                {% endif %}
-                                <p class="date">{{ entry.created_at|date:"d.m.Y" }}</p>
-                            </div>
-                            <div class="entry--right two-rows">
-                                <button class="blue">Edit</button>
-                                <button class="red">Delete</button>
-                            </div>
-                        </div>
+    ></script>
 
-                    {% endfor %}
+</head>
+<body>
+<div class="main--container">
+    <div class="balance">
+        <h1>Current balance</h1>
+        <h2>{{ value_sum }} PLN</h2>
+        <div class="balance--form balance--entry">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="entry--left two-rows">
+                    <input
+                            type="text"
+                            name="title"
+                            id=""
+                            placeholder="Title"
+                    />
+                    <input
+                            type="number"
+                            name="value"
+                            id=""
+                            placeholder="Value"
+                    />
                 </div>
-            </div>
-            <div class="graph">
-                <canvas id="myChart"></canvas>
-            </div>
+                <div class="entry--right two-rows">
+                    <input type="submit" value="Add" class="button"/>
+                </div>
+            </form>
         </div>
-    </body>
+        <div class="balance--container">
+            {% for entry in entries %}
+                <div class="balance--entry">
+                    <div class="entry--left">
+                        <p class="description">{{ entry.title }}</p>
+                        <p class="before">{{ entry.leftover }} PLN</p>
+                        {% if entry.value > 0 %}
+                            <p class="value value__green">+{{ entry.value }} PLN</p>
+                        {% else %}
+                            <p class="value value__red">{{ entry.value }} PLN</p>
+                        {% endif %}
+                        <p class="date">{{ entry.created_at|date:"d.m.Y" }}</p>
+                    </div>
+                    <div class="entry--right two-rows">
+                        <button class="blue">Edit</button>
+                        <button class="red">Delete</button>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+    <div class="graph">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+<script defer>
+    const labels = ['January', 'February', 'March', 'April', 'May', 'June'];
+
+    const data = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0, 10, 5, 2, 20, 30, 45],
+                color: '#fff',
+            },
+        ],
+    };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            color: '#fff',
+            backgroundColor: '#fff',
+            scales: {
+                color: 'rgba(0, 0, 0, 0.4)',
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        // Include a dollar sign in the ticks
+                        callback: function (value, index, ticks) {
+                            return '$' + value;
+                        },
+
+                        color: 'white',
+                    },
+                    color: 'white',
+                },
+            },
+        },
+    };
+    const myChart = new Chart(document.getElementById('myChart'), config);
+</script>
+</body>
 </html>
