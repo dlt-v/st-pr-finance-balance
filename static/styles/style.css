@@ -269,4 +269,16 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     border-radius: 5px;
 }
 
+.logout-button {
+    padding: 6px 12px;
+    background-color: rgba(44, 136, 156, 0.275);
+    border-radius: 5px;
+    font-size: 20px;
+    backdrop-filter: blur(8px);
+    position: absolute;
+    text-decoration: none;
+    bottom: 0;
+    margin: 20px 20px;
+}
+
 /*# sourceMappingURL=style.css.map */
