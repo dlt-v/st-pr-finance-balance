@@ -22,6 +22,7 @@ def index(request):
     for entry in entries:
         leftover_sum -= entry.value
         new_context_entry = {
+            'id': entry.id,
             'title': entry.title,
             'value': entry.value,
             'created_at': entry.created_at,
@@ -48,3 +49,22 @@ def index(request):
 def detail(request, entry_id):
     entry = get_object_or_404(Entry, pk=entry_id)
     return render(request, 'savings/detail.html', {'entry': entry})
+
+
+def delete(request, entry_id):
+    # Check if user is logged in at all.
+    if not request.user.is_authenticated:
+        return redirect('login:login')
+    # Check if entry of this id exists and the user is the owner
+    try:
+        entry = Entry.objects.get(pk=entry_id)
+        if entry.owner == request.user:
+            entry.delete()
+        else:
+
+            return redirect('savings:index')
+    except Entry.DoesNotExist:
+
+        return redirect('savings:index')
+
+    return redirect('savings:index')

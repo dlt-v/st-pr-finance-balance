@@ -53,8 +53,12 @@
                         <p class="date">{{ entry.created_at|date:"d.m.Y" }}</p>
                     </div>
                     <div class="entry--right two-rows">
-                        <button class="blue">Edit</button>
-                        <button class="red">Delete</button>
+                        <a href="{% url 'savings:delete' entry_id=entry.id %}">
+                            <button class="blue">Edit</button>
+                        </a>
+                        <a href="{% url 'savings:delete' entry_id=entry.id %}">
+                            <button class="red">Delete</button>
+                        </a>
                     </div>
                 </div>
 
