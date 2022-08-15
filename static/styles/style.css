@@ -37,7 +37,15 @@ html {
 .container h1 {
     font-weight: 400;
     font-size: 24px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+}
+
+.container .warning {
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: #fa555544;
+    border-radius: 3px;
+    text-align: center;
 }
 
 .container input[type=email], .container input[type=password] {

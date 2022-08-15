@@ -11,7 +11,11 @@ def login(request):
         if user is not None:
             log_user(request, user)
             return redirect('savings:index')
-
+        else:
+            context = {
+                "warning": "Wrong username or password."
+            }
+            return render(request, 'login/login.html', context)
     return render(request, 'login/login.html')
 
 
@@ -25,11 +29,14 @@ def register(request):
             new_user.save()
             print(new_user)
             return redirect('login:login')
-
+        else:
+            context = {
+                "warning": "Email already exists or the passwords don't match."
+            }
+            return render(request, 'login/register.html', context)
     return render(request, 'login/register.html')
 
 
 def logout(request):
     logout_user(request)
     return redirect('login:login')
-
