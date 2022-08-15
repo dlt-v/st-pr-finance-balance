@@ -46,9 +46,19 @@ def index(request):
     return render(request, 'savings/index.html', context)
 
 
-def detail(request, entry_id):
+def edit(request, entry_id):
+    if not request.user.is_authenticated:
+        return redirect('login:login')
     entry = get_object_or_404(Entry, pk=entry_id)
-    return render(request, 'savings/detail.html', {'entry': entry})
+    if entry.owner == request.user:
+        if request.method == "POST":
+            entry.title = request.POST['title']
+            entry.value = request.POST['value']
+            entry.save()
+            return redirect('savings:index')
+        return render(request, 'savings/edit.html', {"entry": entry})
+    else:
+        return redirect('login:login')
 
 
 def delete(request, entry_id):
