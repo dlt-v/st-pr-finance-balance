@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'st-pr-finance-balance.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    "whitenoise.runserver_nostatic",
     'login.apps.LoginConfig',
     'savings.apps.SavingsConfig',
     'django.contrib.admin',
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-	'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
