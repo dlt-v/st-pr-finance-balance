@@ -1,1 +1,1 @@
-web: gunicorn st-pr-finance-balance.wsgi
+web: gunicorn root.wsgi
