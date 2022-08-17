@@ -12,11 +12,21 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+is_prod = os.environ.get('IS_HEROKU', None)
+
+if is_prod:
+    db_user = os.environ.get('DB_NAME')
+    db_passwd = os.environ.get('DB_PASSWORD')
+else:
+    db_user = ''
+    db_passwd = ''
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-r_o@2fo3bsb&6)a$lh-de_+b!p(+4rmqdn$w#!l7be2xoxct=#'
@@ -76,8 +86,12 @@ WSGI_APPLICATION = 'root.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd9lmd6rutg8apf',
+        'USER': db_user,
+        'PASSWORD': db_passwd,
+        'HOST': 'ec2-34-252-216-149.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
