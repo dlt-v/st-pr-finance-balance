@@ -106,10 +106,13 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ```
 
-Now let's migrate our newly installed apps to make sure it sticks.
+Now let's migrate our newly installed apps to make sure it sticks and collect our static files in the specified location:
 
 ```
 python manage.py migrate
+```
+```
+python manage.py collectstatic
 ```
 
 We will have to do one more thing in Settings.py but we'll have to do that after initially deploying our app to Heroku.
